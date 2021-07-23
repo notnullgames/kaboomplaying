@@ -15,7 +15,6 @@ jobs:
       - name: Bundle App
         run: |
           npm install
-          standard
           CI=false npm run build
 
       - name: Deploy to Surge
