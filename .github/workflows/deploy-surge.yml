@@ -15,5 +15,8 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
+      - name: Bundle App
+        run: npm run build
+
       - name: Deploy to Surge
-        run:  npm run deploy --token ${{secrets.SURGE_TOKEN}}
+        run:  npm run deploy -- --token ${{secrets.SURGE_TOKEN}}

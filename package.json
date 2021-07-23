@@ -7,8 +7,7 @@
     "start": "vite",
     "build": "vite build",
     "lint": "standard --fix",
-    "deploy": "surge ./dist kaboomplaying.surge.sh",
-    "predeploy": "npm run build"
+    "deploy": "surge ./dist kaboomplaying.surge.sh"
   },
   "repository": {
     "type": "git",
