@@ -1,0 +1,22 @@
+name: deploy-surge
+on: push
+jobs:
+  deploy-surge:
+    name: Deploy on Surge
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Node
+        uses: actions/setup-node@v2-beta
+        with:
+          node-version: 16
+
+      - name: Bundle App
+        run: |
+          npm install
+          standard
+          CI=false npm run build
+
+      - name: Deploy to Surge
+        run:  npx surge ./dist https://someawsomeurl.surge.sh/ --token ${{secrets.SURGE_TOKEN}}
