@@ -12,10 +12,8 @@ jobs:
         with:
           node-version: 16
 
-      - name: Bundle App
-        run: |
-          npm install
-          CI=false npm run build
+      - name: Install Dependencies
+        run: npm install
 
       - name: Deploy to Surge
-        run:  npx surge ./dist https://someawsomeurl.surge.sh/ --token ${{secrets.SURGE_TOKEN}}
+        run:  npm run deploy --token ${{secrets.SURGE_TOKEN}}
