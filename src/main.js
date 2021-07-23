@@ -14,7 +14,7 @@ const k = kaboom({
   plugins: []
 })
 
-k.loadRoot('/src/')
+k.loadRoot('/')
 
 // build complete people that can be easily placed on screen
 const people = {}

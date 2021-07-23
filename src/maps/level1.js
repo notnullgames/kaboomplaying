@@ -24,6 +24,7 @@ const walls = `
 
 export default function level1 ({ loadSprite, sprite, solid, addLevel }) {
   loadSprite('terrain', 'terrain.png', { sliceX: 6, sliceY: 59 })
+
   const terrain = {
     '░': [
       sprite('terrain', { frame: 22 })
