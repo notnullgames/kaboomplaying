@@ -1,0 +1,30 @@
+{
+  "name": "kaboomplaying",
+  "version": "0.0.0",
+  "description": "Get me sea legs with Kaboom!",
+  "main": "game.js",
+  "scripts": {
+    "start": "vite",
+    "build": "vite build",
+    "deploy": "surge dist kaboomplaying.surge.sh",
+    "predeploy": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/konsumer/kaboomplaying.git"
+  },
+  "keywords": [],
+  "author": "David Konsumer <konsumer@jetboystudio.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/konsumer/kaboomplaying/issues"
+  },
+  "homepage": "https://github.com/konsumer/kaboomplaying#readme",
+  "devDependencies": {
+    "standard": "^16.0.3",
+    "surge": "^0.23.0",
+    "vite": "^2.4.3"
+  },
+  "dependencies": {
+  }
+}
