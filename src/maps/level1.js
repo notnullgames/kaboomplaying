@@ -1,6 +1,30 @@
-function terrainMap ({ loadSprite, sprite, solid }) {
+// TODO: generate all this from a tiled map (as a tiled plugin)
+
+const floor = `
+░░░░░░░░░░
+░░░░░░░░░░
+░░░░░░░░░░
+░░░░░░░░░░
+░░░░░░░░░░
+░░░░░░░░░░
+░░░░░░░░░░
+░░░░░░░░░░
+`
+
+const walls = `
+▛▀▀▀▀▀▀▀▀▜
+▌        ▐
+▌        ▐
+▌        ▐
+▌        ▐
+▌        ▐
+▌        ▐
+▙▄▄▄▄▄▄▄▄▟
+`
+
+export default function level1 ({ loadSprite, sprite, solid, addLevel }) {
   loadSprite('terrain', 'terrain.png', { sliceX: 6, sliceY: 59 })
-  return {
+  const terrain = {
     '░': [
       sprite('terrain', { frame: 22 })
     ],
@@ -41,6 +65,7 @@ function terrainMap ({ loadSprite, sprite, solid }) {
       solid()
     ]
   }
-}
 
-export default terrainMap
+  addLevel(floor.trim().split('\n'), { width: 32, height: 32, ...terrain })
+  addLevel(walls.trim().split('\n'), { width: 32, height: 32, ...terrain })
+}

@@ -2,7 +2,7 @@
 
 // not importing kaboom here (using global in index) due to bug in packaging
 
-import terrainMap from './terrain'
+import level1 from './maps/level1'
 
 const k = kaboom({
   width: 320,
@@ -36,32 +36,8 @@ for (const name of ['emily', 'david', 'thedude', 'tom', 'cyborg']) {
   ]
 }
 
-const terrain = terrainMap(k)
-
-const floor = `
-░░░░░░░░░░
-░░░░░░░░░░
-░░░░░░░░░░
-░░░░░░░░░░
-░░░░░░░░░░
-░░░░░░░░░░
-░░░░░░░░░░
-░░░░░░░░░░
-`
-
-const walls = `
-▛▀▀▀▀▀▀▀▀▜
-▌        ▐
-▌        ▐
-▌        ▐
-▌        ▐
-▌        ▐
-▌        ▐
-▙▄▄▄▄▄▄▄▄▟
-`
-
-addLevel(floor.trim().split('\n'), { width: 32, height: 32, ...terrain })
-addLevel(walls.trim().split('\n'), { width: 32, height: 32, ...terrain })
+// load map
+level1(k)
 
 add([
   sprite('emily')
