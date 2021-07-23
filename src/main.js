@@ -1,4 +1,4 @@
-/* global kaboom, loadSprite, sprite, pos, addLevel, add, rect, text, color */
+/* global kaboom, loadSprite, sprite, pos, add, rect, text, color */
 
 // not importing kaboom here (using global in index) due to bug in packaging
 
