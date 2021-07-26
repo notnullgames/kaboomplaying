@@ -27,5 +27,8 @@
     "vite": "^2.4.3"
   },
   "dependencies": {
+    "kaboom": "^0.5.1",
+    "pako": "^2.0.3",
+    "tiled-kaboom": "^0.0.9"
   }
 }

@@ -1,7 +1,7 @@
 /* global kaboom, fetch */
 
 // not importing kaboom here (using global in index) due to bug in packaging
-import pluginTiled from 'https://unpkg.com/tiled-kaboom@latest/dist/tiled-kaboom.modern.js'
+import pluginTiled from 'tiled-kaboom'
 
 const k = kaboom({
   width: 320,
@@ -23,7 +23,7 @@ const main = async () => {
 
   // build complete people that can be easily placed on screen
   const people = {}
-  for (const name of ['emily', 'david', 'thedude', 'tom', 'cyborg']) {
+  for (const name of ['emily', 'david', 'the_dude', 'tom', 'cyborg']) {
     await k.loadSprite(name, `people/${name}/walk.png`, {
       sliceX: 9,
       sliceY: 4,
@@ -42,9 +42,10 @@ const main = async () => {
   }
 
   function say (who, what) {
+    const personName = who.toLowerCase().replace(/ /g, '_')
     k.add([
       k.rect(225, 80),
-      k.pos(85, 150),
+      k.pos(85, 155),
       k.color(0, 0, 0, 0.4)
     ])
 
@@ -54,23 +55,23 @@ const main = async () => {
       k.color(1, 1, 1, 0.6)
     ])
 
-    k.add(people[who.toLowerCase()])
+    k.add(people[personName])
   }
 
   k.add([
-    k.sprite('emily'),
+    k.sprite('david'),
     k.pos(32, 32)
   ])
     .play('S')
 
   k.add([
-    k.sprite('david'),
+    k.sprite('emily'),
     k.pos(64, 32)
   ])
     .play('W')
 
   k.add([
-    k.sprite('thedude'),
+    k.sprite('the_dude'),
     k.pos(96, 32)
   ])
     .play('E')
@@ -81,7 +82,16 @@ const main = async () => {
   ])
     .play('N')
 
-  say('Emily', 'Hi! This is a simple demo of Kaboom! Seems to be working.')
+  const cyborg = k.add([
+    k.sprite('cyborg'),
+    k.pos(164, 32)
+  ])
+
+  // turn south & stop
+  await cyborg.play('S')
+  cyborg.stop()
+
+  say('David', 'Hi! This is a simple demo of Kaboom! Seems to be working.')
 }
 
 main()
