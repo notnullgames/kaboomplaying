@@ -1,7 +1,7 @@
 /* global kaboom, fetch */
 
 // not importing kaboom here (using global in index) due to bug in packaging
-import pluginTiled from 'https://unpkg.com/tiled-kaboom@latest/kaboom-tiled.js'
+import pluginTiled from 'https://unpkg.com/tiled-kaboom@latest/dist/tiled-kaboom.modern.js'
 
 const k = kaboom({
   width: 320,
@@ -41,6 +41,22 @@ const main = async () => {
     ]
   }
 
+  function say (who, what) {
+    k.add([
+      k.rect(225, 80),
+      k.pos(85, 150),
+      k.color(0, 0, 0, 0.4)
+    ])
+
+    k.add([
+      k.text(`${who}\n\n${what}`, 10, { width: 220 }),
+      k.pos(90, 160),
+      k.color(1, 1, 1, 0.6)
+    ])
+
+    k.add(people[who.toLowerCase()])
+  }
+
   k.add([
     k.sprite('emily'),
     k.pos(32, 32)
@@ -65,19 +81,7 @@ const main = async () => {
   ])
     .play('N')
 
-  k.add([
-    k.rect(225, 80),
-    k.pos(85, 150),
-    k.color(0, 0, 0, 0.4)
-  ])
-
-  k.add([
-    k.text('Emily\n\nHi. How\'s it going? This is a basic test of kaboom! game-engine.', 10, { width: 220 }),
-    k.pos(90, 160),
-    k.color(1, 1, 1, 0.6)
-  ])
-
-  k.add(people.emily)
+  say('Emily', 'Hi! This is a simple demo of Kaboom! Seems to be working.')
 }
 
 main()
