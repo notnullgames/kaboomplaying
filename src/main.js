@@ -15,6 +15,7 @@ const k = kaboom({
 k.loadRoot('/')
 
 const main = async () => {
+  // load a JSON Tiled map
   const { levels, key } = await k.loadTiledMap(await fetch('map.json').then(r => r.json()))
   for (const level of levels) {
     k.addLevel(level, { width: 32, height: 32, ...key })
