@@ -27,6 +27,5 @@
     "vite": "^2.4.3"
   },
   "dependencies": {
-    "tilemap-editor": "^0.6.1"
   }
 }

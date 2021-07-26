@@ -1,8 +1,7 @@
-/* global kaboom, loadSprite, sprite, pos, add, rect, text, color */
+/* global kaboom */
 
 // not importing kaboom here (using global in index) due to bug in packaging
-
-import level1 from "./maps/level1";
+import pluginTiled from 'https://raw.githack.com/notnullgames/tiled-kaboom/main/kaboom-tiled.js'
 
 const k = kaboom({
   width: 320,
@@ -10,47 +9,74 @@ const k = kaboom({
   debug: true,
   clearColor: [0, 0, 0, 1],
   crisp: true,
-  global: true,
-  plugins: [],
-});
+  plugins: [pluginTiled]
+})
 
-k.loadRoot("/");
+k.loadRoot('/')
 
-// build complete people that can be easily placed on screen
-const people = {};
-for (const name of ["emily", "david", "thedude", "tom", "cyborg"]) {
-  loadSprite(name, `people/${name}/walk.png`, {
-    sliceX: 9,
-    sliceY: 4,
-    anims: {
-      N: { from: 0, to: 7 },
-      W: { from: 9, to: 16 },
-      S: { from: 18, to: 25 },
-      E: { from: 27, to: 34 },
-    },
-  });
-  loadSprite(`${name}-portrait`, `people/${name}/portrait.png`);
-  people[name] = [sprite(`${name}-portrait`), pos(0, 150)];
+const main = async () => {
+  const { levels, key } = await k.loadTiledMap(await fetch('map.json').then(r => r.json()))
+  for (const level of levels) {
+    k.addLevel(level, { width: 32, height: 32, ...key })
+  }
+
+  // build complete people that can be easily placed on screen
+  const people = {}
+  for (const name of ['emily', 'david', 'thedude', 'tom', 'cyborg']) {
+    await k.loadSprite(name, `people/${name}/walk.png`, {
+      sliceX: 9,
+      sliceY: 4,
+      anims: {
+        N: { from: 0, to: 7 },
+        W: { from: 9, to: 16 },
+        S: { from: 18, to: 25 },
+        E: { from: 27, to: 34 }
+      }
+    })
+    await k.loadSprite(`${name}-portrait`, `people/${name}/portrait.png`)
+    people[name] = [
+      k.sprite(`${name}-portrait`),
+      k.pos(0, 150)
+    ]
+  }
+
+  k.add([
+    k.sprite('emily'),
+    k.pos(32, 32)
+  ])
+    .play('S')
+
+  k.add([
+    k.sprite('david'),
+    k.pos(64, 32)
+  ])
+    .play('W')
+
+  k.add([
+    k.sprite('thedude'),
+    k.pos(96, 32)
+  ])
+    .play('E')
+
+  k.add([
+    k.sprite('tom'),
+    k.pos(128, 32)
+  ])
+    .play('N')
+
+  k.add([
+    k.rect(225, 80),
+    k.pos(85, 150),
+    k.color(0, 0, 0, 0.4)
+  ])
+
+  k.add([
+    k.text('Emily\n\nHi. How\'s it going? This is a basic test of kaboom! game-engine.', 10, { width: 220 }),
+    k.pos(90, 160),
+    k.color(1, 1, 1, 0.6)
+  ])
+
+  k.add(people.emily)
 }
 
-// load map
-level1(k);
-
-add([sprite("emily")]).play("S");
-add([sprite("david"), pos(32, 0)]).play("W");
-add([sprite("thedude"), pos(64, 0)]).play("E");
-add([sprite("tom"), pos(96, 0)]).play("N");
-
-add([rect(225, 80), pos(85, 150), color(0, 0, 0, 0.4)]);
-
-add([
-  text(
-    "Emily\n\nHi. How's it going? This is a basic test of kaboom! game-engine.",
-    10,
-    { width: 220 }
-  ),
-  pos(90, 160),
-  color(1, 1, 1, 0.6),
-]);
-
-add(people.emily);
+main()
