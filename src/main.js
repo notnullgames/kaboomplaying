@@ -1,7 +1,7 @@
 /* global kaboom, fetch */
 
 // not importing kaboom here (using global in index) due to bug in packaging
-import pluginTiled from 'https://raw.githack.com/notnullgames/tiled-kaboom/main/kaboom-tiled.js'
+import pluginTiled from 'https://unpkg.com/tiled-kaboom@latest/kaboom-tiled.js'
 
 const k = kaboom({
   width: 320,
